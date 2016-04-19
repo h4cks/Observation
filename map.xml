@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<map proto="1.3.3">
+	<name>Observation</name>
+	<version>0.2.0</version>
+	<objective>敵を殲滅せよ/killing your enemy</objective>
+
+	<authors>
+		<author>EEE</author>
+	</authors>
+
+	<teams>
+		<team max="16" color="black">Black Team</team>
+		<team max="16" color="white">White Team</team>
+	</teams>
+	
+	<score>
+		<time>420</time><!-- 時間(秒) -->
+		<limit>100</limit>!-- スコアの上限 -->
+	</score>
+	
+<!-- 初期装備 -->
+	<kits>
+		<kit name="default">
+			<!-- 装備 -->
+			<chestplate damage="-3000" bind="true">Chainmail Chestplate</chestplate><!-- damage値-3000で耐久度上がる -->
+			
+			<!-- ホットバー -->
+			<item slot="0">Stone Sword</item>
+			<item slot="1" enchantment="Arrow Damage:7">Bow</item>
+			<item slot="2" amount="1" bind="true">Arrow</item>
+			<item slot="4" amount="32">Cooked Beef</item>
+			<item slot="6" damage="8229" bind="true">Potion</item><!-- Instant Health II -->
+			<item slot="7" damage="8229" bind="true">Potion</item>
+			<item slot="8" amount="1" bind="true">TNT</item>
+
+			<!--ポーション効果 -->
+			<potion duration="6" amplifier="2">DAMAGE_RESISTANCE</potion>
+			<potion duration="4" amplifier="3">INCREASE_DAMAGE</potion>
+		</kit>
+	
+	<!-- チームごとの初期装備 -->
+		<kit name="black" parents="default">
+			<!-- 装備 -->
+			<helmet color="000000" damage="-3000" bind="true">Leather Helmet</helmet>
+			<boots color="000000" damage="-3000" locked="true">Leather Boots</boots>
+			<leggings color="000000" damage="-3000" locked="true">Leather Leggings</leggings>
+		</kit>
+		<kit name="white" parents="default">
+			<!-- 装備 -->
+			<helmet color="ffffff" damage="-3000" bind="true">Leather Helmet</helmet>
+			<boots color="ffffff" damage="-3000" locked="true">Leather Boots</boots>
+			<leggings color="ffffff" damage="-3000" locked="true">Leather Leggings</leggings>
+		</kit>
+		
+	</kits>
+
+<!-- スポーン位置 -->
+	<spawns>
+		<spawn team="black" yaw="-90" kit="black">
+			<cuboid min="-39,53,-2 " max="-35,53,2"/>
+		</spawn>
+		<spawn team="white" yaw="90" kit="white">
+			<cuboid min="36,53,-2 " max="40,53,2"/>
+		</spawn>
+		<default yaw="0">
+			<cuboid min="-2,62,-2" max="3,62,1"/>
+		</default>
+	</spawns>
+
+
+<!-- フィルター定義 -->
+	<filters>
+		<filter name="only-black" parents="deny-players deny-world deny-blocks">
+			<allow>
+				<team>black</team>
+			</allow>
+		</filter>
+		<filter name="only-white" parents="deny-players deny-world deny-blocks">
+			<allow>
+				<team>white</team>
+			</allow>
+		</filter>
+		<filter name="TNT-allow" parents="deny-all">
+			<allow>
+				<block>TNT</block>
+			</allow>
+		</filter>
+	</filters>
+
+<!-- 領域定義 -->
+	<regions>
+		<!-- 陣地の定義 -->
+		<union name="black-base">
+			<cuboid min="-44,50,-5" max="-30,65,5"/>
+			<cuboid min="-11,55,-5" max="-30,65,5"/>
+		</union>
+		<union name="white-base">
+			<cuboid min="31,50,-5" max="45,65,5"/>
+			<cuboid  min="12,55,-5" max="31,65,5"/>
+		</union>
+
+		<!-- 陣地内へ侵入の禁止 -->
+		<apply enter="only-black" message="敵の本拠地に入る事は出来ません。 / You may not enter enemy base.">
+			<region name="black-base"/>
+		</apply>
+		<apply enter="only-white" message="敵の本拠地に入る事は出来ません。 / You may not enter enemy base.">
+			<region name="white-base"/>
+		</apply>
+
+		<!-- 陣地内のTNT設置の無効化 -->
+		<apply block="deny-all" message="本拠地内の編集はできません。">
+			<region name="black-base"/>
+			<region name="white-base"/>
+		</apply>
+
+		<!-- 地形編集の無効化 -->
+		<apply block="deny-all" block-place="TNT-allow" message="地形の編集はできません。">
+			<negative>
+				<cuboid min="0,0,0" max="0,0,0"/>
+			</negative>
+		</apply>
+	</regions>
+
+<!-- ワープゾーンの定義 -->
+	<portals>
+		<!-- black portal -->
+		<!-- Pink -->
+		<portal x="@6" y="@50" z="@-3" yaw="180">
+			<cuboid min="-8,1,-4" max="-5,4,-1"/>
+		</portal>
+		<!-- Aqua -->
+		<portal x="@1" y="@50" z="@-3" yaw="180">
+			<cuboid min="-12,1,-4" max="-9,4,1"/>
+		</portal>
+
+		<!-- white portal -->
+		<!-- Pink -->
+		<portal x="@-5" y="@50" z="@2" yaw="180">
+			<cuboid min="6,1,1" max="9,4,4"/>
+		</portal>
+		<!-- Aqua -->
+		<portal x="@-1" y="@50" z="@2" yaw="180">
+			<cuboid min="10,1,1" max="13,4,4"/>
+		</portal>
+	</portals>
+
+<!--  itemremove -->
+	<itemremove>
+		<item>Stone Sword</item>
+		<item>Gold Sword</item>
+		<item>Bow</item>
+		<item>Arrow</item>
+		<item>Cooked Beef</item>
+		<item>Potion</item>
+		<item>Leather Helmet</item>
+		<item>Chainmail Chestplate</item>
+		<item>Leather Leggings</item>
+		<item>Leather Boots</item>
+		<item>TNT</item>
+	</itemremove>
+
+<!-- キル報酬 -->
+	<killreward>
+		<kit>
+			<potion duration="3" amplifier="5">Regeneration</potion>
+		</kit>
+		<item amount="1" bind="true">TNT</item>
+		<item amount="1" bind="true">Arrow</item>
+		<item amount="1" bind="true">Exp Bottle</item>
+	</killreward>
+	<!-- キル数で変化するkillreward -->
+	<killreward>
+		<filter>
+			<kill-streak count="2"/><!-- Speed I -->
+		</filter>
+		<item amount="1" damage="8194" bind="true" potions="speed:6000:0:true">potion</item>
+	</killreward>
+	<killreward>
+		<filter>
+			<kill-streak count="3"/>
+		</filter>
+		<item amount="1" bind="true">Stone Sword</item>
+	</killreward>
+	<killreward>
+		<filter>
+			<kill-streak count="4"/>
+		</filter>
+		<item amount="1" enchantment="Protection Environmental:1;Protection Projectile:1" bind="true">Iron Helmet</item>
+		<item amount="1" enchantment="Protection Environmental:1;Protection Projectile:1" bind="true">Iron Chestplate</item>
+	</killreward>
+	<killreward><!-- Fire Resistance -->
+		<filter>
+			<kill-streak count="6"/>
+		</filter>
+		<item amount="1" damage="8259" bind="true" potions="fire resistance:6000:0:true">potion</item>
+	</killreward>
+	<killreward>
+		<filter>
+			<kill-streak count="7"/>
+		</filter>
+		<item amount="1" bind="true">Stone Sword</item>
+	</killreward>
+	<killreward><!-- Speed II -->
+		<filter>
+			<kill-streak count="9"/>
+		</filter>
+		<item amount="1" damage="8226" bind="true" potions="speed:6000:0:true">potion</item>
+	</killreward>
+	<killreward>
+		<filter>
+			<kill-streak count="11"/>
+		</filter>
+		<item amount="1" bind="true">Stone Sword</item>
+	</killreward>
+	<killreward>
+		<filter>
+			<kill-streak count="15"/>
+		</filter>
+		<item amount="1" enchantment="Protection Environmental:4;Protection Projectile:4;Protection Explosions:4" bind="true">Diamond Helmet</item>
+		<item amount="1" enchantment="Protection Environmental:4;Protection Projectile:4;Protection Explosions:4" bind="true">Diamond Chestplate</item>
+		<item amount="1" bind="true">Stone Sword</item>
+	</killreward>
+
+<!--  落下ダメージ無効  -->
+	<disabledamage>
+  		<damage>fall</damage>
+	</disabledamage>
+
+<!-- TNTの設定 -->
+	<tnt>
+		<blockdamage>off</blockdamage>
+		<instantignite>on</instantignite>
+	</tnt>
+
+<!-- ゲームモードの設定(TNTダメージの強化のため) -->
+	<script>
+		<![CDATA[
+			match.on('start', function() {
+				 setDifficulty("HARD");
+			});
+		]]>
+	</script>
+
+<!-- チュートリアル -->
+	<tutorial>
+		<stage title="Team Death Match (TDM)">
+			<title lang="ja_JP">チームデスマッチ(TDM)</title>
+		    <message>
+    			 <line>Team Death Match(TDM) is a simple game mode. The objective is killing your enemy.</line>
+			</message>
+		    <message lang="ja_JP">
+			     <line>Team Death Match(TDM)はより多くの敵プレイヤーを倒すことを目標にしたシンプルなゲームモードです。</line>
+		    </message>
+		</stage>
+		<stage title="Falling Damage">
+			<title lang="ja_JP">落下ダメージ</title>
+			<message>
+				<line>Falling damage is disabled in this map .</line>
+			</message>
+			<message lang="ja_JP">
+				<line>このmapでは落下ダメージが無効になります。</line>
+			</message>
+		</stage>   
+	</tutorial>
+</map>
