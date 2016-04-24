@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map proto="1.3.3">
 	<name>Observation</name>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<objective>敵を殲滅せよ/killing your enemy</objective>
 
 	<authors>
@@ -34,8 +34,8 @@
 			<item slot="8" amount="1" bind="true">TNT</item>
 
 			<!--ポーション効果 -->
-			<potion duration="6" amplifier="2">DAMAGE_RESISTANCE</potion>
-			<potion duration="4" amplifier="3">INCREASE_DAMAGE</potion>
+			<potion duration="6" amplifier="2">Damage Resistance</potion>
+			<potion duration="4" amplifier="3">Increase Damage</potion>
 		</kit>
 	
 	<!-- チームごとの初期装備 -->
@@ -51,7 +51,11 @@
 			<boots color="ffffff" damage="-3000" locked="true">Leather Boots</boots>
 			<leggings color="ffffff" damage="-3000" locked="true">Leather Leggings</leggings>
 		</kit>
-		
+
+	<!-- ポータル進入時のポーション効果 -->
+		<kit name="portal-resistance">
+			<potion duration="2" amplifier="1">Damage Resistance</potion>
+		</kit>
 	</kits>
 
 <!-- スポーン位置 -->
@@ -95,8 +99,16 @@
 			<cuboid min="-11,55,-5" max="-30,65,5"/>
 		</union>
 		<union name="white-base">
-			<cuboid min="31,50,-5" max="45,65,5"/>
+			<cuboid min="31,50,-5" max="44,65,5"/>
 			<cuboid  min="12,55,-5" max="31,65,5"/>
+		</union>
+		
+		<!-- ポータル領域 -->
+		<union name="portal-union-for-poteffect">
+			<cuboid min="-8,1,-4" max="-5,4,-1"/>
+			<cuboid min="-12,1,-4" max="-9,4,1"/>
+			<cuboid min="6,1,1" max="9,4,4"/>
+			<cuboid min="10,1,1" max="13,4,4"/>
 		</union>
 
 		<!-- 陣地内へ侵入の禁止 -->
@@ -118,6 +130,11 @@
 			<negative>
 				<cuboid min="0,0,0" max="0,0,0"/>
 			</negative>
+		</apply>
+
+		<!-- ポータル進入時にポーション効果を与える -->
+		<apply kit="portal-resistance">
+			<region name="portal-union-for-poteffect"/>
 		</apply>
 	</regions>
 
@@ -157,12 +174,13 @@
 		<item>Leather Leggings</item>
 		<item>Leather Boots</item>
 		<item>TNT</item>
+		<item>Painting</item>
 	</itemremove>
 
 <!-- キル報酬 -->
 	<killreward>
 		<kit>
-			<potion duration="3" amplifier="5">Regeneration</potion>
+			<potion duration="3" amplifier="4">Regeneration</potion>
 		</kit>
 		<item amount="1" bind="true">TNT</item>
 		<item amount="1" bind="true">Arrow</item>
@@ -185,8 +203,8 @@
 		<filter>
 			<kill-streak count="4"/>
 		</filter>
-		<item amount="1" enchantment="Protection Environmental:1;Protection Projectile:1" bind="true">Iron Helmet</item>
-		<item amount="1" enchantment="Protection Environmental:1;Protection Projectile:1" bind="true">Iron Chestplate</item>
+		<item amount="1" name="Nice Helmet" enchantment="Protection Environmental:2" bind="true">Iron Helmet</item>
+		<item amount="1" name="Nice Chestplate" enchantment="Protection Environmental:2" bind="true">Iron Chestplate</item>
 	</killreward>
 	<killreward><!-- Fire Resistance -->
 		<filter>
@@ -216,10 +234,10 @@
 		<filter>
 			<kill-streak count="15"/>
 		</filter>
-		<item amount="1" enchantment="Protection Environmental:4;Protection Projectile:4;Protection Explosions:4" bind="true">Diamond Helmet</item>
-		<item amount="1" enchantment="Protection Environmental:4;Protection Projectile:4;Protection Explosions:4" bind="true">Diamond Chestplate</item>
+		<item amount="1" name="God Helmet" enchantment="Protection Environmental:4" bind="true">Diamond Helmet</item>
+		<item amount="1" name="God Chestplate" enchantment="Protection Environmental:4" bind="true">Diamond Chestplate</item>
 		<item amount="1" bind="true">Stone Sword</item>
-	</killreward>
+	</killreward>5
 
 <!--  落下ダメージ無効  -->
 	<disabledamage>
