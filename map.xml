@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map proto="1.3.3">
 	<name>Observation</name>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<objective>敵を殲滅せよ/killing your enemy</objective>
 
 	<authors>
@@ -235,7 +235,6 @@
 		</filter>
 		<item amount="1" name="God Helmet" enchantment="Protection Environmental:4" bind="true">Diamond Helmet</item>
 		<item amount="1" name="God Chestplate" enchantment="Protection Environmental:4" bind="true">Diamond Chestplate</item>
-		<item amount="1" bind="true">Stone Sword</item>
 	</killreward>5
 
 <!--  落下ダメージ無効  -->
