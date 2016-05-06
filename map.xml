@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map proto="1.3.3">
 	<name>Observation</name>
-	<version>0.3.1</version>
+	<version>0.3.2</version>
 	<objective>敵を殲滅せよ/killing your enemy</objective>
 
 	<authors>
@@ -161,7 +161,7 @@
 		</portal>
 	</portals>
 
-<!--  itemremove -->
+<!-- itemremove -->
 	<itemremove>
 		<item>Stone Sword</item>
 		<item>Gold Sword</item>
@@ -239,7 +239,7 @@
 
 <!--  落下ダメージ無効  -->
 	<disabledamage>
-  		<damage>fall</damage>
+		<damage>fall</damage>
 	</disabledamage>
 
 <!-- TNTの設定 -->
@@ -257,16 +257,17 @@
 		]]>
 	</script>
 
-<!-- チュートリアル -->
+<!-- チュートリアル -->	
+	<include src="tutorial.xml"/>
 	<tutorial>
 		<stage title="Team Death Match (TDM)">
 			<title lang="ja_JP">チームデスマッチ(TDM)</title>
-		    <message>
-    			 <line>Team Death Match(TDM) is a simple game mode. The objective is killing your enemy.</line>
+			<message>
+				<line>Team Death Match(TDM) is a simple game mode. The objective is killing your enemy.</line>
 			</message>
-		    <message lang="ja_JP">
-			     <line>Team Death Match(TDM)はより多くの敵プレイヤーを倒すことを目標にしたシンプルなゲームモードです。</line>
-		    </message>
+			<message lang="ja_JP">
+				<line>Team Death Match(TDM)はより多くの敵プレイヤーを倒すことを目標にしたシンプルなゲームモードです。</line>
+			</message>
 		</stage>
 		<stage title="Falling Damage">
 			<title lang="ja_JP">落下ダメージ</title>
@@ -276,6 +277,31 @@
 			<message lang="ja_JP">
 				<line>このmapでは落下ダメージが無効になります。</line>
 			</message>
-		</stage>   
+		</stage>
+<!-- ポータルの説明 -->
+		<stage title="Portal-Below">
+			<message>
+				<line>These are portals.</line>
+				<line>You can move to above area corresponding to color of wools.</line>
+			</message>
+			<message lang="ja_JP">
+				<line>ここがワープゾーンです。</line>
+				<line>羊毛の色に対応した上の領域へと移動できます。</line>
+			</message>
+			<teleport>
+				<point yaw="180" pitch="0">10,7,13</point>
+			</teleport>
+		</stage>
+		<stage title="Portal-Above">
+			<message>
+				<line>Here is the area.</line>
+			</message>
+			<message lang="ja_JP">
+				<line>こちらがワープ先です。</line>
+			</message>
+			<teleport>
+				<point yaw="180" pitch="0">-2,50,13</point>
+			</teleport>
+		</stage>
 	</tutorial>
 </map>
