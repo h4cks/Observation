@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map proto="1.3.3">
 	<name>Observation</name>
-	<version>0.3.2</version>
+	<version>0.3.4</version>
 	<objective>敵を殲滅せよ/killing your enemy</objective>
 
 	<authors>
@@ -9,7 +9,7 @@
 	</authors>
 
 	<teams>
-		<team max="16" color="black">Black Team</team>
+		<team max="16" color="blue">Blue Team</team>
 		<team max="16" color="white">White Team</team>
 	</teams>
 	
@@ -39,11 +39,11 @@
 		</kit>
 	
 	<!-- チームごとの初期装備 -->
-		<kit name="black" parents="default">
+		<kit name="blue" parents="default">
 			<!-- 装備 -->
-			<helmet color="000000" damage="-3000" bind="true">Leather Helmet</helmet>
-			<boots color="000000" damage="-3000" locked="true">Leather Boots</boots>
-			<leggings color="000000" damage="-3000" locked="true">Leather Leggings</leggings>
+			<helmet color="0000ff" damage="-3000" bind="true">Leather Helmet</helmet>
+			<boots color="0000ff" damage="-3000" locked="true">Leather Boots</boots>
+			<leggings color="0000ff" damage="-3000" locked="true">Leather Leggings</leggings>
 		</kit>
 		<kit name="white" parents="default">
 			<!-- 装備 -->
@@ -60,7 +60,7 @@
 
 <!-- スポーン位置 -->
 	<spawns>
-		<spawn team="black" yaw="-90" kit="black">
+		<spawn team="blue" yaw="-90" kit="blue">
 			<cuboid min="-39,53,-2 " max="-35,53,2"/>
 		</spawn>
 		<spawn team="white" yaw="90" kit="white">
@@ -74,9 +74,9 @@
 
 <!-- フィルター定義 -->
 	<filters>
-		<filter name="only-black" parents="deny-players deny-world deny-blocks">
+		<filter name="only-blue" parents="deny-players deny-world deny-blocks">
 			<allow>
-				<team>black</team>
+				<team>blue</team>
 			</allow>
 		</filter>
 		<filter name="only-white" parents="deny-players deny-world deny-blocks">
@@ -94,7 +94,7 @@
 <!-- 領域定義 -->
 	<regions>
 		<!-- 陣地の定義 -->
-		<union name="black-base">
+		<union name="blue-base">
 			<cuboid min="-44,50,-5" max="-30,65,5"/>
 			<cuboid min="-11,55,-5" max="-30,65,5"/>
 		</union>
@@ -112,8 +112,8 @@
 		</union>
 
 		<!-- 陣地内へ侵入の禁止 -->
-		<apply enter="only-black" message="敵の本拠地に入る事は出来ません。 / You may not enter enemy base.">
-			<region name="black-base"/>
+		<apply enter="only-blue" message="敵の本拠地に入る事は出来ません。 / You may not enter enemy base.">
+			<region name="blue-base"/>
 		</apply>
 		<apply enter="only-white" message="敵の本拠地に入る事は出来ません。 / You may not enter enemy base.">
 			<region name="white-base"/>
@@ -121,7 +121,7 @@
 
 		<!-- 陣地内のTNT設置の無効化 -->
 		<apply block="deny-all" message="本拠地内の編集はできません。">
-			<region name="black-base"/>
+			<region name="blue-base"/>
 			<region name="white-base"/>
 		</apply>
 
@@ -140,22 +140,18 @@
 
 <!-- ワープゾーンの定義 -->
 	<portals>
-		<!-- black portal -->
-		<!-- Pink -->
+		<!-- blue portal -->
 		<portal x="@6" y="@50" z="@-3" yaw="180">
 			<cuboid min="-8,1,-4" max="-5,4,-1"/>
 		</portal>
-		<!-- Aqua -->
 		<portal x="@1" y="@50" z="@-3" yaw="180">
 			<cuboid min="-12,1,-4" max="-9,4,1"/>
 		</portal>
 
 		<!-- white portal -->
-		<!-- Pink -->
 		<portal x="@-5" y="@50" z="@2" yaw="180">
 			<cuboid min="6,1,1" max="9,4,4"/>
 		</portal>
-		<!-- Aqua -->
 		<portal x="@-1" y="@50" z="@2" yaw="180">
 			<cuboid min="10,1,1" max="13,4,4"/>
 		</portal>
@@ -164,13 +160,16 @@
 <!-- itemremove -->
 	<itemremove>
 		<item>Stone Sword</item>
-		<item>Gold Sword</item>
 		<item>Bow</item>
 		<item>Arrow</item>
 		<item>Cooked Beef</item>
 		<item>Potion</item>
 		<item>Leather Helmet</item>
 		<item>Chainmail Chestplate</item>
+		<item>Iron Helmet</item>
+		<item>Iron Chestplate</item>
+		<item>Diamond Helmet</item>
+		<item>Diamond Chestplate</item>
 		<item>Leather Leggings</item>
 		<item>Leather Boots</item>
 		<item>TNT</item>
@@ -183,7 +182,7 @@
 		</kit>
 		<item amount="1" bind="true">TNT</item>
 		<item amount="1" bind="true">Arrow</item>
-		<item amount="1" bind="true">Exp Bottle</item>
+		<item amount="3" bind="true">Exp Bottle</item>
 	</killreward>
 	<!-- キル数で変化するkillreward -->
 	<killreward>
