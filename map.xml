@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <map proto="1.3.3">
 	<name>Observation</name>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<objective>敵を殲滅せよ/killing your enemy</objective>
 
 	<authors>
@@ -179,6 +179,7 @@
 		<item>Leather Leggings</item>
 		<item>Leather Boots</item>
 		<item>TNT</item>
+		<item>Glass Bottle</item>
 	</itemremove>
 
 <!-- キル報酬 -->
@@ -201,14 +202,14 @@
 		<filter>
 			<kill-streak count="3"/>
 		</filter>
-		<item amount="1" bind="true">Stone Sword</item>
+		<item amount="1">Stone Sword</item>
 	</killreward>
 	<killreward>
 		<filter>
 			<kill-streak count="4"/>
 		</filter>
-		<item amount="1" name="Nice Helmet" enchantment="Protection Environmental:2" bind="true">Iron Helmet</item>
-		<item amount="1" name="Nice Chestplate" enchantment="Protection Environmental:2" bind="true">Iron Chestplate</item>
+		<item amount="1" name="Nice Helmet" enchantment="Protection Environmental:4" bind="true">Iron Helmet</item>
+		<item amount="1" name="Nice Chestplate" enchantment="Protection Explosions:3" bind="true">Iron Chestplate</item>
 	</killreward>
 	<killreward><!-- Fire Resistance -->
 		<filter>
@@ -220,19 +221,19 @@
 		<filter>
 			<kill-streak count="7"/>
 		</filter>
-		<item amount="1" bind="true">Stone Sword</item>
+		<item amount="1">Stone Sword</item>
 	</killreward>
 	<killreward><!-- Speed II -->
 		<filter>
 			<kill-streak count="9"/>
 		</filter>
-		<item amount="1" damage="8226" bind="true" potions="speed:6000:0:true">potion</item>
+		<item amount="1" damage="8226" bind="true" potions="speed:6000:1:true">potion</item>
 	</killreward>
 	<killreward>
 		<filter>
 			<kill-streak count="11"/>
 		</filter>
-		<item amount="1" bind="true">Stone Sword</item>
+		<item amount="1">Stone Sword</item>
 	</killreward>
 	<killreward>
 		<filter>
